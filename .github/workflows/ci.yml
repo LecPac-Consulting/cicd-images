@@ -1,5 +1,13 @@
 name: Build Docker images
 
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '12 3 * * 3'
+
 jobs:
   build:
     runs-on: ubuntu-latest
