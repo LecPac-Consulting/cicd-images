@@ -11,6 +11,7 @@ RUN apt-get update && \
     yq \
     bash \
     curl \
+    unzip \
     python3 \
     python3-pip \
     && \
