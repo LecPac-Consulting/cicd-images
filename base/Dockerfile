@@ -5,6 +5,7 @@ RUN groupadd -g 1001 cicd && \
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+    ca-certificates \
     openssh-client \
     git \
     jq \
