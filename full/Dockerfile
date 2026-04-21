@@ -7,6 +7,8 @@ ARG HELM_VERSION=v4.1.4
 ARG TERRAFORM_VERSION=1.14.7
 ARG OPENTOFU_VERSION=1.11.6
 ARG OPENBAO_VERSION=2.5.2
+ARG TF_SUMMARIZE_VERSION=0.3.20
+ARG TF_SUMMARIZE_SHA256=f5c17b24dac6996c79820ee87d53dd7ff86f7df6390b30b6bc0c57ed2873536c
 
 # kubectl
 RUN curl -fsSL "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
@@ -41,5 +43,12 @@ RUN curl -fsSL "https://github.com/openbao/openbao/releases/download/v${OPENBAO_
     tar -xzf /tmp/openbao.tar.gz -C /tmp bao && \
     mv /tmp/bao /usr/local/bin/bao && \
     rm /tmp/openbao.tar.gz
+
+# tf-summarize
+RUN curl -fsSL "https://github.com/dineshba/tf-summarize/releases/download/v${TF_SUMMARIZE_VERSION}/tf-summarize_${TF_SUMMARIZE_VERSION}_linux_amd64.deb" \
+      -o /tmp/tf-summarize.deb && \
+    echo "${TF_SUMMARIZE_SHA256}  /tmp/tf-summarize.deb" | sha256sum -c - && \
+    dpkg -i /tmp/tf-summarize.deb && \
+    rm /tmp/tf-summarize.deb
 
 USER 1001
