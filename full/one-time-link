@@ -1,0 +1,23 @@
+#!/opt/one-time-link/bin/python3
+
+import os
+import sys
+import privatebinapi
+
+PRIVATEBIN_URL = os.environ["PRIVATEBIN_URL"]  # e.g, https://privatebin.net
+PRIVATEBIN_EXPIRATION = os.environ.get("PRIVATEBIN_EXPIRATION", "10min")
+PRIVATEBIN_BURN_AFTER_READING = os.environ.get("PRIVATEBIN_BURN_AFTER_READING", "true").lower() == "true"
+
+
+def main():
+    response = privatebinapi.send(
+        PRIVATEBIN_URL, 
+        text=sys.stdin.read(), 
+        burn_after_reading=PRIVATEBIN_BURN_AFTER_READING, 
+        expiration=PRIVATEBIN_EXPIRATION
+    )
+    print("You can access your one-time link here: " + response["full_url"])
+
+
+if __name__ == "__main__":
+    main()

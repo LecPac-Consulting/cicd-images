@@ -10,6 +10,17 @@ ARG OPENBAO_VERSION=2.5.2
 ARG TF_SUMMARIZE_VERSION=0.3.20
 ARG TF_SUMMARIZE_SHA256=f5c17b24dac6996c79820ee87d53dd7ff86f7df6390b30b6bc0c57ed2873536c
 
+# Python
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y python3 python3-pip python3-venv && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install one-time-link CLI
+RUN python3 -m venv /opt/one-time-link && \
+    /opt/one-time-link/bin/pip install privatebinapi
+COPY one-time-link /usr/local/bin/one-time-link
+RUN chmod +x /usr/local/bin/one-time-link
+
 # kubectl
 RUN curl -fsSL "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
       -o /tmp/kubectl && \
