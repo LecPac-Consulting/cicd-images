@@ -10,6 +10,11 @@ ARG OPENBAO_VERSION=2.5.2
 ARG TF_SUMMARIZE_VERSION=0.3.20
 ARG TF_SUMMARIZE_SHA256=f5c17b24dac6996c79820ee87d53dd7ff86f7df6390b30b6bc0c57ed2873536c
 
+# Tools
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y rsync && \
+    rm -rf /var/lib/apt/lists/*
+
 # Python
 RUN apt-get update && \
     apt-get install --no-install-recommends -y python3 python3-pip python3-venv && \
