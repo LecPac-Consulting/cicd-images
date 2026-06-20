@@ -10,4 +10,5 @@ Licensed under the [Apache-2.0](LICENSE) license.
 ## Available images
 
 - `ghcr.io/lecpac-consulting/cicd-images/base:stable`: The image contains various tools useful in CI/CD pipelines, such as git, jq, yq, bash, curl, python3 and pip.
-- `ghcr.io/lecpac-consulting/cicd-images/full:stable`: The image contains all tools from `base` plus additional tools useful in CI/CD pipelines: kubectl, helm, terraform, opentofu, openbao.
+- `ghcr.io/lecpac-consulting/cicd-images/full:stable`: The image contains all tools from `base` plus additional tools useful in CI/CD pipelines: kubectl, helm, terraform, opentofu, openbao, python (with pip & venv)
+- `ghcr.io/lecpac-consulting/cicd-images/toolkit-fs:stable`: The image contains all tools from `base` plus additional tools useful in filesystem operations: cryptsetup, mdadm, xfsprogs, fio.
