@@ -9,6 +9,7 @@ ARG OPENTOFU_VERSION=1.11.6
 ARG OPENBAO_VERSION=2.5.2
 ARG TF_SUMMARIZE_VERSION=0.3.20
 ARG TF_SUMMARIZE_SHA256=f5c17b24dac6996c79820ee87d53dd7ff86f7df6390b30b6bc0c57ed2873536c
+ARG FALCOCTL_VERSION=0.13.0
 
 # Tools
 RUN apt-get update && \
@@ -66,5 +67,12 @@ RUN curl -fsSL "https://github.com/dineshba/tf-summarize/releases/download/v${TF
     echo "${TF_SUMMARIZE_SHA256}  /tmp/tf-summarize.deb" | sha256sum -c - && \
     dpkg -i /tmp/tf-summarize.deb && \
     rm /tmp/tf-summarize.deb
+
+# falcoctl
+RUN curl -fsSL "https://github.com/falcosecurity/falcoctl/releases/download/v${FALCOCTL_VERSION}/falcoctl_${FALCOCTL_VERSION}_linux_amd64.tar.gz" \
+      -o /tmp/falcoctl.tar.gz && \
+    tar -xzf /tmp/falcoctl.tar.gz -C /tmp falcoctl && \
+    mv /tmp/falcoctl /usr/local/bin/falcoctl && \
+    rm /tmp/falcoctl.tar.gz
 
 USER 1001
