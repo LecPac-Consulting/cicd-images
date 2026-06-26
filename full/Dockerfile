@@ -7,6 +7,7 @@ ARG HELM_VERSION=v4.1.4
 ARG TERRAFORM_VERSION=1.14.7
 ARG OPENTOFU_VERSION=1.11.6
 ARG OPENBAO_VERSION=2.5.2
+ARG TFLINT_VERSION=0.63.1
 ARG TF_SUMMARIZE_VERSION=0.3.20
 ARG TF_SUMMARIZE_SHA256=f5c17b24dac6996c79820ee87d53dd7ff86f7df6390b30b6bc0c57ed2873536c
 ARG FALCOCTL_VERSION=0.13.0
@@ -67,6 +68,13 @@ RUN curl -fsSL "https://github.com/dineshba/tf-summarize/releases/download/v${TF
     echo "${TF_SUMMARIZE_SHA256}  /tmp/tf-summarize.deb" | sha256sum -c - && \
     dpkg -i /tmp/tf-summarize.deb && \
     rm /tmp/tf-summarize.deb
+
+# tflint
+RUN curl -fsSL "https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip" \
+      -o /tmp/tflint.zip && \
+    unzip /tmp/tflint.zip tflint -d /tmp && \
+    mv /tmp/tflint /usr/local/bin/tflint && \
+    rm /tmp/tflint.zip
 
 # falcoctl
 RUN curl -fsSL "https://github.com/falcosecurity/falcoctl/releases/download/v${FALCOCTL_VERSION}/falcoctl_${FALCOCTL_VERSION}_linux_amd64.tar.gz" \
