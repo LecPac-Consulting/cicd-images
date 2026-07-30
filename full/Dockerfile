@@ -90,7 +90,7 @@ RUN curl -fsSL "https://github.com/sigstore/cosign/releases/download/v${COSIGN_V
     chmod +x /usr/local/bin/cosign
 
 #crane
-RUN curl -sSfL https://github.com/google/go-containerregistry/releases/download/v${CRANE_VERSION}/go-containerregistry_Linux_x86_64.tar.gz \
+RUN curl -sSfL https://github.com/google/go-containerregistry/releases/download/v0.20.2/go-containerregistry_Linux_x86_64.tar.gz \
     | tar -xz -C /usr/local/bin crane \
     && chmod +x /usr/local/bin/crane
 
